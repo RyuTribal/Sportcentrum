@@ -1,0 +1,21 @@
+{
+  "name": "sportcentrum-api",
+  "version": "1.0.0",
+  "description": "Back-end for sportcentrum",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.bundle.js",
+    "build": "webpack",
+    "dev": "nodemon ./app.js localhost 3080"
+  },
+  "author": "Sedelkin, Shakir, Huseynli",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "http-proxy-middleware": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "webpack": "^5.70.0"
+  }
+}
