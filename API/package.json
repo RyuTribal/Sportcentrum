@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "express-oauth2-jwt-bearer": "^1.1.0",
+    "express-openid-connect": "^2.7.2",
     "http-proxy-middleware": "^2.0.4",
     "rss-parser": "^3.12.0"
   },
