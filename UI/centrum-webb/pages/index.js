@@ -1,19 +1,18 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import { withRouter } from "next/router";
 
-class Home extends Component{
-    constructor(){
-        super();
-        this.state={
-            rss_feed:[]
-        };
+
+class Home extends Component {
+  componentDidMount = async () => {
+    if (!localStorage.getItem("hasPicked")) {
+      this.props.router.push({
+        pathname: "/splash",
+      });
     }
-    componentDidMount = async () =>{
-        
-    }
-    render(){
-    return(
-        <h1>Suad fat</h1>
-    )}
+  };
+  render() {
+    return <h1>We home</h1>;
+  }
 }
 
-export default Home;
+export default withRouter(Home);
