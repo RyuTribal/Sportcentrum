@@ -1,31 +1,42 @@
-.flexed{
-    display: flex;
+.flexed {
+  display: flex;
 }
 
-.direction_row{
-    flex-direction: row;
+.direction_row {
+  flex-direction: row;
 }
 
-.direction_column{
-    flex-direction: column;
+.direction_column {
+  flex-direction: column;
 }
 
-.center_horizontal{
-    justify-content: center;
+.center_horizontal {
+  justify-content: center;
 }
 
-.center_vertical{
-    align-items: center;
+.center_vertical {
+  align-items: center;
 }
 
-.zero_margin{
-    margin:0;
+.zero_margin {
+  margin: 0;
 }
 
-.four_grid{
-    flex: 0 0 25%;
+.four_grid {
+  flex: 0 0 25%;
 }
 
-.two_grid{
-    flex: 0 0 50%;
+.two_grid {
+  flex: 0 0 50%;
+}
+
+.content_container {
+  padding: 10px;
+}
+
+.card_grid {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column;
 }

@@ -34,7 +34,13 @@ class Splash extends Component {
 
   handleSave = async () => {
     localStorage.setItem("hasPicked", true);
-    localStorage.setItem("sports", this.state.sports);
+    let sports_arr = [];
+    Object.keys(this.state.sports).map((sport, i) => {
+      if (this.state.sports[sport] === true || this.state.allPicked === true) {
+        sports_arr.push(sport);
+      }
+    });
+    localStorage.setItem("sports", JSON.stringify(sports_arr));
     this.props.router.push({
       pathname: "/",
     });
