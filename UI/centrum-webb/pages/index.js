@@ -33,14 +33,13 @@ class Home extends Component {
     }
   };
   render() {
-    console.log(this.state.rss_feed);
     return (
       <Box className={con_styles.content_container}>
         <Grid container spacing={2}>
           {this.state.rss_feed.map((rss) => (
             <Grid sx={{display: 'flex'}} item xs={12} sm={6} md={4} >
               <Card className={con_styles.card_grid}>
-                <CardActionArea>
+                <CardActionArea href={rss.link} target="_blank">
                   <CardMedia
                     component="img"
                     height="200"
