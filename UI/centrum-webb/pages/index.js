@@ -29,6 +29,7 @@ class Home extends Component {
     } else {
       let sports = JSON.parse(localStorage.getItem("sports"));
       let feed = await getRssFeed(sports);
+      console.log(feed);
       this.setState({ rss_feed: feed });
     }
   };
@@ -43,7 +44,7 @@ class Home extends Component {
                   <CardMedia
                     component="img"
                     height="200"
-                    image={rss.enclosure.url}
+                    image={rss.enclosure ? rss.enclosure.url : ''}
                     alt="article image"
                   />
                   <CardContent>
