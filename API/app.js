@@ -1,14 +1,18 @@
 const express = require('express');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-const cors = require('cors')
+const cookieParser = require('cookie-parser');
 const rss = require('./routes/rss');
 const schedule = require('./routes/schedule');
 const app = express(),
         bodyParser = require('body-parser'),
         port = 3080;
 
+require('dotenv').config({ path: './user/KEYS.env' })
 require("./user/auth");
+
+// Use cookie-parser to read cookies
+app.use(cookieParser(process.env.SESSION_KEY));
 
 // Encrypted cookie using key and send it to browser, because we dont want to send a normal id because then anyone can access it
 app.use(cookieSession({
@@ -16,7 +20,7 @@ app.use(cookieSession({
     //secure: true, // only send over HTTPS connection
     //httpOnly: true, // only send over HTTP and HTTPS and not client JS
     name: 'google-auth-session',
-    keys: ['fphrnjdFzZjkDLpa', 'MzCmQeuGydhuDzin'] // Encrypt cookie using key. Put the key in seperate file.
+    keys: [process.env.SESSION_KEY] // Encrypt cookie using key. Put the key in seperate file and git ignore it.
   }))
 
 const isLoggedIn = (req, res, next) => {
@@ -39,7 +43,9 @@ app.get('/', (req, res) => {
 });
 
 app.get("/failed", (req, res) => {res.send("Failed")})
-app.get("/success", isLoggedIn, (req, res) => {res.send(`Welcome ${req.user.email}`)})
+app.get("/success", isLoggedIn, (req, res) => {
+    res.send(`Welcome ${req.user.email}`)
+})
 
 // Scope
 app.get('/auth/google',passport.authenticate('google', {scope:['profile', 'email']}));
@@ -58,7 +64,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/');
 })
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
