@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-let Sports = ['Football', 'Swimming', 'Basketball'];
+let Sports = ['Football'];
 
 exports.Schedule = function(req, res){
     var con = mysql.createConnection({
