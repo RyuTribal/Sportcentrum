@@ -67,6 +67,7 @@ app.get("/logout", (req, res) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
+
 app.use('/api/rss', rss);
 app.use('/api/schedule', schedule);
 
