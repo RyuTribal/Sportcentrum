@@ -119,6 +119,7 @@ class Splash extends Component {
                 </Box>
                 {Object.keys(this.state.sports).map((sport, i) => (
                   <Box
+                    key={i}
                     className={`${styles.flexed} ${styles.center_vertical} ${styles.zero_margin}`}
                     sx={{
                       padding: "10px 20px",

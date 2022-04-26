@@ -89,19 +89,19 @@ export default function NavBar(props) {
             </SearchBar>
           </Box>
           <Box display="flex" sx={{ justifyContent: "space-around" }}>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <GroupsOutlined fontSize="medium" />
             </Button>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <CalendarMonthOutlined fontSize="medium" />
             </Button>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <PersonOutline fontSize="medium" />
             </Button>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
             </Button>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <TuneOutlined fontSize="medium" />
             </Button>
           </Box>
@@ -120,10 +120,10 @@ export default function NavBar(props) {
             </Button>
           </Box>
           <Box display="flex" sx={{ justifyContent: "space-around" }}>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
             </Button>
-            <Button buttonType="icon" size="large" color="inherit">
+            <Button buttontype="icon" size="large" color="inherit">
               <TuneOutlined fontSize="medium" />
             </Button>
           </Box>
