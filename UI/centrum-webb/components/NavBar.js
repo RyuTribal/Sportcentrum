@@ -21,6 +21,7 @@ import Button from "./Button";
 import font_styles from "../styles/fonts.module.css";
 import { Box } from "@mui/system";
 import useWindowSize from "../redundant_functions/WindowSize";
+import { NextLinkComposed } from "./Link";
 
 const SearchBar = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,7 +72,12 @@ export default function NavBar(props) {
       <AppBar position="sticky">
         <Toolbar>
           <Box display="flex" flexGrow={1}>
-            <Button href="/">
+            <Button
+              component={NextLinkComposed}
+              to={{
+                pathname: "/",
+              }}
+            >
               <Typography className={`${font_styles.white_color}`} variant="h6">
                 Sportcentrum.
               </Typography>
@@ -113,7 +119,12 @@ export default function NavBar(props) {
       <AppBar position="sticky">
         <Toolbar>
           <Box display="flex" flexGrow={1}>
-            <Button href="/">
+            <Button
+              component={NextLinkComposed}
+              to={{
+                pathname: "/",
+              }}
+            >
               <Typography className={`${font_styles.white_color}`} variant="h6">
                 Sportcentrum.
               </Typography>
