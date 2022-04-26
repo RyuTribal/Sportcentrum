@@ -11,17 +11,18 @@ const app = express(),
 require('dotenv').config({ path: './user/KEYS.env' })
 require("./user/auth");
 
-// Use cookie-parser to read cookies
-app.use(cookieParser(process.env.SESSION_KEY));
-
 // Encrypted cookie using key and send it to browser, because we dont want to send a normal id because then anyone can access it
 app.use(cookieSession({
     maxAge: 24*60*60*1000, // miliseconds
-    //secure: true, // only send over HTTPS connection
-    //httpOnly: true, // only send over HTTP and HTTPS and not client JS
+    //secure: true, // only send over HTTPS connection, prevents MITM attacks since the transfer is over TLS
+    //httpOnly: true, // only send over HTTP and HTTPS and not client JS, prevents XSS attacks from stealing the session identifier
+    //sameSite: true, // blocks the ability to send a cookie in a cross-origin request, provides protection against CSRF attacks
     name: 'google-auth-session',
-    keys: [process.env.SESSION_KEY] // Encrypt cookie using key. Put the key in seperate file and git ignore it.
+    keys: [process.env.SESSION_KEY1, process.env.SESSION_KEY2, process.env.SESSION_KEY3] // Encrypt cookie using key. Put the key in seperate file and git ignore it.
   }))
+
+// Use cookie-parser to read cookies
+app.use(cookieParser(process.env.SESSION_KEY));
 
 const isLoggedIn = (req, res, next) => {
     if (req.user) {
@@ -31,10 +32,7 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
-// initialize passport
 app.use(passport.initialize());
-
-// use cookie session
 app.use(passport.session());
 
 // Test start button
@@ -48,9 +46,10 @@ app.get("/success", isLoggedIn, (req, res) => {
 })
 
 // Scope
-app.get('/auth/google',passport.authenticate('google', {scope:['profile', 'email']}));
+app.get('/auth/google',passport.authenticate('google', {scope:['profile', 'email']})); // copy the link of the scopes needed from google developer console
 
 // Token received from google
+// Exchange the token for a user profile
 app.get('/auth/google/callback',passport.authenticate('google', {failureRedirect: '/failed',}),
     function (req, res) {
         res.redirect('/success')
@@ -66,7 +65,6 @@ app.get("/logout", (req, res) => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-
 
 app.use('/api/rss', rss);
 app.use('/api/schedule', schedule);
