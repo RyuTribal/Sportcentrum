@@ -157,16 +157,12 @@ class Splash extends Component {
                 className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
                 sx={{ padding: "20px 0", gap: "10px" }}
               >
-                <Button
-                  onClick={this.handleSave}
-                  variant="contained"
-                  text="Fortsätt"
-                />
-                <Button
-                  onClick={this.handleSkip}
-                  variant="outlined"
-                  text="Hoppa över"
-                />
+                <Button onClick={this.handleSave} variant="contained">
+                  Fortsätt
+                </Button>
+                <Button onClick={this.handleSkip} variant="outlined">
+                  Hoppa över
+                </Button>
               </Container>
             </Container>
           </Box>
