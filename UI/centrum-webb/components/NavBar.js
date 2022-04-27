@@ -6,15 +6,22 @@ import {
   Typography,
   InputBase,
   IconButton,
+  Menu,
+  MenuItem,
+  Divider,
+  Avatar,
 } from "@mui/material";
 import {
   CalendarMonth,
   CalendarMonthOutlined,
+  DarkMode,
   Groups,
   GroupsOutlined,
+  Login,
   NotificationsOutlined,
   PersonOutline,
   Search,
+  Settings,
   TuneOutlined,
 } from "@mui/icons-material";
 import Button from "./Button";
@@ -67,6 +74,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar(props) {
   const size = useWindowSize();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   if (size.width > 851) {
     return (
       <AppBar position="sticky">
@@ -94,7 +109,10 @@ export default function NavBar(props) {
               />
             </SearchBar>
           </Box>
-          <Box display="flex" sx={{ justifyContent: "space-around" }}>
+          <Box
+            display="flex"
+            sx={{ justifyContent: "space-around", alignItems: "center" }}
+          >
             <Button buttontype="icon" size="large" color="inherit">
               <GroupsOutlined fontSize="medium" />
             </Button>
@@ -102,14 +120,19 @@ export default function NavBar(props) {
               <CalendarMonthOutlined fontSize="medium" />
             </Button>
             <Button buttontype="icon" size="large" color="inherit">
-              <PersonOutline fontSize="medium" />
-            </Button>
-            <Button buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
             </Button>
-            <Button buttontype="icon" size="large" color="inherit">
-              <TuneOutlined fontSize="medium" />
+            <Button
+              sx={{ height: "40px" }}
+              darkMode
+              size="medium"
+              color="inherit"
+            >
+              Logga in
             </Button>
+            {/*<Button buttontype="icon" size="large" color="inherit">
+              <Avatar />
+            </Button>*/}
           </Box>
         </Toolbar>
       </AppBar>
@@ -133,9 +156,6 @@ export default function NavBar(props) {
           <Box display="flex" sx={{ justifyContent: "space-around" }}>
             <Button buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
-            </Button>
-            <Button buttontype="icon" size="large" color="inherit">
-              <TuneOutlined fontSize="medium" />
             </Button>
           </Box>
         </Toolbar>

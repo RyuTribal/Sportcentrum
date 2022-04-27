@@ -222,13 +222,12 @@ class Splash extends Component {
                 <Button
                   variant="contained"
                   darkMode={true}
-                  text="Kom igång!"
                   onClick={() => {
                     this.props.router.query.page = 1;
                     this.props.router.push(this.props.router);
                     this.forceUpdate();
                   }}
-                />
+                >Kom igång!</Button>
               </Container>
               <Container
                 className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.two_grid}`}
