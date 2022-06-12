@@ -1,34 +1,18 @@
 import React from "react";
 import { styled, alpha } from "@mui/material/styles";
+import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  InputBase,
-  IconButton,
-  Menu,
-  MenuItem,
-  Divider,
-  Avatar,
-} from "@mui/material";
-import {
-  CalendarMonth,
   CalendarMonthOutlined,
-  DarkMode,
-  Groups,
   GroupsOutlined,
-  Login,
   NotificationsOutlined,
-  PersonOutline,
   Search,
-  Settings,
-  TuneOutlined,
 } from "@mui/icons-material";
-import Button from "./Button";
-import font_styles from "../styles/fonts.module.css";
+import CustomButton from "../Button/Button";
+import styles from "./NavBar.module.css";
 import { Box } from "@mui/system";
-import useWindowSize from "../redundant_functions/WindowSize";
-import { NextLinkComposed } from "./Link";
+import useWindowSize from "../../redundant_functions/WindowSize";
+import { NextLinkComposed } from "../Link/Link";
+import {store} from "../../redux/store";
 
 const SearchBar = styled("div")(({ theme }) => ({
   position: "relative",
@@ -72,31 +56,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar(props) {
+function NavBar(props) {
   const size = useWindowSize();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  console.log(store.getState());
   if (size.width > 851) {
     return (
-      <AppBar position="sticky">
-        <Toolbar>
+      <AppBar position="fixed" sx={{ alignItems: "center" }}>
+        <Toolbar
+          sx={{ maxWidth: 1024, width: "100%", padding: "0 !important" }}
+        >
           <Box display="flex" flexGrow={1}>
-            <Button
+            <CustomButton
               component={NextLinkComposed}
               to={{
                 pathname: "/",
               }}
             >
-              <Typography className={`${font_styles.white_color}`} variant="h6">
+              <Typography className={`${styles.white_color}`} variant="h6">
                 Sportcentrum.
               </Typography>
-            </Button>
+            </CustomButton>
           </Box>
           <Box display="flex" flexGrow={1}>
             <SearchBar>
@@ -113,53 +92,60 @@ export default function NavBar(props) {
             display="flex"
             sx={{ justifyContent: "space-around", alignItems: "center" }}
           >
-            <Button buttontype="icon" size="large" color="inherit">
+            <CustomButton buttontype="icon" size="large" color="inherit">
               <GroupsOutlined fontSize="medium" />
-            </Button>
-            <Button buttontype="icon" size="large" color="inherit">
+            </CustomButton>
+            <CustomButton buttontype="icon" size="large" color="inherit">
               <CalendarMonthOutlined fontSize="medium" />
-            </Button>
-            <Button buttontype="icon" size="large" color="inherit">
+            </CustomButton>
+            <CustomButton buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
-            </Button>
-            <Button
+            </CustomButton>
+            <CustomButton
               sx={{ height: "40px" }}
-              darkMode
+              darkmode
               size="medium"
               color="inherit"
+              component={NextLinkComposed}
+              to={{
+                pathname: "/signin",
+              }}
             >
               Logga in
-            </Button>
+            </CustomButton>
             {/*<Button buttontype="icon" size="large" color="inherit">
               <Avatar />
             </Button>*/}
           </Box>
         </Toolbar>
+        {props.children}
       </AppBar>
     );
   } else {
     return (
-      <AppBar position="sticky">
+      <AppBar position="fixed">
         <Toolbar>
           <Box display="flex" flexGrow={1}>
-            <Button
+            <CustomButton
               component={NextLinkComposed}
               to={{
                 pathname: "/",
               }}
             >
-              <Typography className={`${font_styles.white_color}`} variant="h6">
+              <Typography className={`${styles.white_color}`} variant="h6">
                 Sportcentrum.
               </Typography>
-            </Button>
+            </CustomButton>
           </Box>
           <Box display="flex" sx={{ justifyContent: "space-around" }}>
-            <Button buttontype="icon" size="large" color="inherit">
+            <CustomButton buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
-            </Button>
+            </CustomButton>
           </Box>
         </Toolbar>
       </AppBar>
     );
   }
 }
+
+export default NavBar;

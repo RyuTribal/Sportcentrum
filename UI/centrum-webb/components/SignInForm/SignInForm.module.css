@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formContainerCenter {
+  max-width: 510px;
+  display: block;
+  margin: 0 auto;
+}
+
+.formContainerCenter > *{
+    margin-bottom: 30px;
+}
+
+.formContainerBorder {
+  border-radius: 5px;
+  padding: 30px;
+  border: 1px solid #383838;
+}
+
+.uniError {
+  color: #f44336;
+  text-align: center;
+  transition: 0.4s;
+  padding-bottom: 20px;
+}
+
+.header {
+  margin: 20px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.title {
+  margin-left: 16px;
+  flex: 1;
+}
+
+.formLink {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.linkBase {
+  color: #c97d5c;
+  float: right;
+  margin-left: 3px;
+}
+
+.forgotPassword {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

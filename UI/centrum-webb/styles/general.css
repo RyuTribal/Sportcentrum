@@ -1,3 +1,23 @@
+.right-aligned-text {
+  text-align: end;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.primary_color{
+    color: #c64d2c;
+}
+
+.white_color{
+    color: #f6f2ef;
+}
+
+.centered-text{
+    text-align: center;
+}
+
 .flexed {
   display: flex;
 }
@@ -33,7 +53,7 @@
 .content_container {
   padding: 10px;
   height: 100%;
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 

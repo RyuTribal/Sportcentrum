@@ -7,15 +7,20 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import theme from "../material-ui-themes/theme";
 import createEmotionCache from "../material-ui-themes/createEmotionCache";
-import NavBar from "../components/NavBar";
-import BottomNavBar from "../components/BottomNavBar";
+import NavBar from "../components/NavBar/NavBar";
+import BottomNavBar from "../components/BottomNavBar/BottomNavBar";
+import { Toolbar } from "@mui/material";
+import { wrapper, store } from "../redux/store";
+import { Provider } from "react-redux";
+import { Box } from "@mui/system";
+import styles from "../styles/general.css"
 
 // Client-side cache shared for the whole session
 // of the user in the browser.
 
 const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props) {
+function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const router = useRouter();
   const { pathname } = router;
@@ -33,7 +38,13 @@ export default function MyApp(props) {
 
         <CssBaseline />
         {noNav.includes(pathname) ? null : <NavBar />}
-        <Component {...pageProps} />
+        {noNav.includes(pathname) ? null : <Toolbar />}
+        <Provider store={store}>
+        <Box className="content_container">
+          <Component {...pageProps} />
+        </Box>
+        </Provider>
+        {noNav.includes(pathname) ? null : <Toolbar />}
         {noNav.includes(pathname) ? null : <BottomNavBar />}
       </ThemeProvider>
       <style jsx global>{`
@@ -57,3 +68,5 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default wrapper.withRedux(MyApp);

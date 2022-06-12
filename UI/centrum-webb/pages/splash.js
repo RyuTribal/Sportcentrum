@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Container, Typography, Box, Checkbox } from "@mui/material";
 import { CircleOutlined, Circle } from "@mui/icons-material";
 import theme from "../material-ui-themes/theme";
-import styles from "../styles/containers.module.css";
-import fontstyles from "../styles/fonts.module.css";
 import Button from "../components/Button";
 import { withRouter } from "next/router";
 
@@ -60,31 +58,31 @@ class Splash extends Component {
             sx={{
               height: "100%",
             }}
-            className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+            className={`flexed center_horizontal direction_column center_vertical zero_margin`}
           >
             <Container
-              className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+              className={`flexed direction_column center_vertical zero_margin`}
               maxWidth="md"
             >
               <Container
-                className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+                className={`flexed direction_column center_vertical zero_margin`}
                 sx={{ padding: "20px 0" }}
               >
                 <Typography
                   variant="h5"
-                  className={`${fontstyles.bold} ${fontstyles.center} ${fontstyles.primary_color}`}
+                  className={`bold-text centered-text primary_color`}
                 >
                   Välj sport
                 </Typography>
                 <Typography
                   variant="caption"
-                  className={`${fontstyles.center} ${fontstyles.primary_color}`}
+                  className={`centered-text primary_color`}
                 >
                   Vilken sport interesserar dig?
                 </Typography>
               </Container>
               <Container
-                className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+                className={`flexed direction_column center_vertical zero_margin`}
                 sx={{
                   borderBottom: "0.5px solid rgba(56,56,56,0.3)",
                   borderTop: "0.5px solid rgba(56,56,56,0.3)",
@@ -92,18 +90,18 @@ class Splash extends Component {
                 }}
               >
                 <Box
-                  className={`${styles.flexed} ${styles.center_vertical} ${styles.zero_margin}`}
+                  className={`flexed center_vertical zero_margin`}
                   sx={{ padding: "10px 20px", width: "100%" }}
                 >
                   <Typography
                     variant="body1"
-                    className={`${fontstyles.primary_color} ${fontstyles.bold}`}
+                    className={`primary_color bold-text`}
                     sx={{ flex: "0 0 50%", textAlign: "left" }}
                   >
                     Välj alla
                   </Typography>
                   <Box
-                    className={`${styles.flexed} ${styles.zero_margin}`}
+                    className={`flexed zero_margin`}
                     sx={{ flex: "0 0 50%", justifyContent: "end" }}
                   >
                     <Checkbox
@@ -120,7 +118,7 @@ class Splash extends Component {
                 {Object.keys(this.state.sports).map((sport, i) => (
                   <Box
                     key={i}
-                    className={`${styles.flexed} ${styles.center_vertical} ${styles.zero_margin}`}
+                    className={`flexed center_vertical zero_margin`}
                     sx={{
                       padding: "10px 20px",
                       width: "100%",
@@ -134,7 +132,7 @@ class Splash extends Component {
                       {sport}
                     </Typography>
                     <Box
-                      className={`${styles.flexed} ${styles.zero_margin}`}
+                      className={`flexed zero_margin`}
                       sx={{ flex: "0 0 50%", justifyContent: "end" }}
                     >
                       <Checkbox
@@ -155,7 +153,7 @@ class Splash extends Component {
                 ))}
               </Container>
               <Container
-                className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+                className={`flexed direction_column center_vertical zero_margin`}
                 sx={{ padding: "20px 0", gap: "10px" }}
               >
                 <Button onClick={this.handleSave} variant="contained">
@@ -180,33 +178,33 @@ class Splash extends Component {
               height: "100%",
               gridAutoFlow: "column",
             }}
-            className={`${styles.flexed} ${styles.direction_column} ${styles.center_vertical} ${styles.zero_margin}`}
+            className={`flexed direction_column center_vertical zero_margin`}
           >
-            <Container className={styles.four_grid}></Container>
+            <Container className="four_grid"></Container>
             <Container
-              className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.four_grid}`}
+              className={`flexed center_horizontal direction_column center_vertical four_grid`}
             >
-              <Typography className={fontstyles.white_color} variant="h6">
+              <Typography className="white_color" variant="h6">
                 Välkommen till
               </Typography>
               <Typography
-                className={`${fontstyles.white_color} ${fontstyles.bold}`}
+                className={`white_color bold-text`}
                 variant="h3"
               >
                 Sportcentrum.
               </Typography>
             </Container>
             <Container
-              className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.four_grid}`}
+              className={`flexed center_horizontal direction_column center_vertical four_grid`}
             >
               <Typography
-                className={`${fontstyles.white_color} ${fontstyles.bold} ${fontstyles.center}`}
+                className={`white_color bold-text centered-text`}
                 variant="h6"
               >
                 All sport på en och samma plattform!
               </Typography>
               <Typography
-                className={`${fontstyles.white_color} ${fontstyles.center}`}
+                className={`white_color centered-text`}
                 variant="subtitle1"
               >
                 Sportcentrum är en oberoende samlingsplats för alla
@@ -214,14 +212,14 @@ class Splash extends Component {
               </Typography>
             </Container>
             <Container
-              className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.four_grid}`}
+              className={`flexed center_horizontal direction_column center_vertical four_grid`}
             >
               <Container
-                className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.two_grid}`}
+                className={`flexed center_horizontal direction_column center_vertical two_grid`}
               >
                 <Button
                   variant="contained"
-                  darkMode={true}
+                  darkmode={true}
                   onClick={() => {
                     this.props.router.query.page = 1;
                     this.props.router.push(this.props.router);
@@ -230,16 +228,16 @@ class Splash extends Component {
                 >Kom igång!</Button>
               </Container>
               <Container
-                className={`${styles.flexed} ${styles.center_horizontal} ${styles.direction_column} ${styles.center_vertical} ${styles.two_grid}`}
+                className={`flexed center_horizontal direction_column center_vertical two_grid`}
               >
                 <Typography
-                  className={`${fontstyles.white_color} ${fontstyles.center}`}
+                  className={`white_color center`}
                   variant="caption"
                 >
                   Sportcentrum är en del av
                 </Typography>
                 <Typography
-                  className={`${fontstyles.white_color} ${fontstyles.center} ${fontstyles.bold}`}
+                  className={`white_color centered-text bold-text`}
                   variant="caption"
                 >
                   EIOP

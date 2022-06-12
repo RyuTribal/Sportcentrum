@@ -1,6 +1,6 @@
-import useWindowSize from "../redundant_functions/WindowSize";
+import useWindowSize from "../../redundant_functions/WindowSize";
 import React, {useEffect} from "react";
-import Link from "./Link";
+import Link from "../Link/Link";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import {
   CalendarMonthOutlined,
@@ -53,7 +53,7 @@ export default function BottomNavBar(props) {
   if (size.width <= 851) {
     return (
       <Paper
-        sx={{ position: "sticky", bottom: 0, left: 0, right: 0 }}
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
         <BottomNavigation value={value} onChange={handleChange}>
@@ -70,5 +70,8 @@ export default function BottomNavBar(props) {
         </BottomNavigation>
       </Paper>
     );
+  }
+  else{
+    return null;
   }
 }

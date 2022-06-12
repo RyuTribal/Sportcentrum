@@ -1,0 +1,18 @@
+.commonButton{
+    background-color: #c64d2c;
+    color: #f6f2ef;
+}
+
+.commonButton:hover{
+    background-color: #9f3f24;
+    color: #f6f2ef;
+}
+
+.reverse{
+    background-color: #f6f2ef;
+    color: #c64d2c;
+}
+
+.reverse:hover{
+    background-color: #dad9d8;
+}

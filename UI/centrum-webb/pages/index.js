@@ -11,8 +11,7 @@ import {
   CardMedia,
   Grid,
 } from "@mui/material";
-import con_styles from "../styles/containers.module.css";
-import font_styles from "../styles/fonts.module.css";
+
 
 class Home extends Component {
   constructor() {
@@ -34,44 +33,52 @@ class Home extends Component {
   };
   render() {
     return (
-      <Box className={con_styles.content_container}>
-        <Grid container spacing={2}>
-          {this.state.rss_feed.map((rss, i) => (
-            <Grid key={i} sx={{ display: "flex" }} item xs={12} sm={6} md={4}>
-              <Card className={con_styles.card_grid}>
-                <CardActionArea href={rss.link} target="_blank">
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={rss.enclosure ? rss.enclosure.url : ""}
-                    alt="article image"
-                  />
-                  <CardContent>
-                    <Typography variant="h6">{rss.title}</Typography>
-                    <Box
-                      sx={{ marginTop: 1 }}
-                      className={`${con_styles.flexed} ${con_styles.direction_row} ${con_styles.center_vertical}`}
+      <Grid container spacing={2}>
+        {this.state.rss_feed.map((rss, i) => (
+          <Grid key={i} sx={{ display: "flex" }} item xs={12} sm={6} md={4}>
+            <Card sx={{ width: "100%" }}>
+              <CardActionArea
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                href={rss.link}
+                target="_blank"
+              >
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={rss.image}
+                  alt="article image"
+                />
+                <CardContent sx={{ alignSelf: "flex-start" }}>
+                  <Typography variant="h6">{rss.title}</Typography>
+                </CardContent>
+                <CardContent sx={{ width: "100%", marginTop: "auto" }}>
+                  <Box
+                    sx={{ width: "100%" }}
+                    className={`flexed direction_row center_vertical`}
+                  >
+                    <Typography
+                      className={`two_grid`}
+                      variant="caption"
                     >
-                      <Typography
-                        className={`${con_styles.two_grid}`}
-                        variant="caption"
-                      >
-                        Aftonbladet
-                      </Typography>
-                      <Typography
-                        className={`${con_styles.two_grid} ${font_styles.right}`}
-                        variant="caption"
-                      >
-                        {formatDate(rss.isoDate, "sv-SE")}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+                      Aftonbladet
+                    </Typography>
+                    <Typography
+                      className={`two_grid right-aligned-text`}
+                      variant="caption"
+                    >
+                      {formatDate(rss.isoDate, "sv-SE")}
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     );
   }
 }

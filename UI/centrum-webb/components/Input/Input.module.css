@@ -1,0 +1,10 @@
+.input {
+  width: 100%;
+  font-size: 15px;
+  border-color: #383838;
+  background-color: rgb(245, 244, 242);
+}
+
+.input:valid:focus{
+    background-color: transparent !important;
+}
