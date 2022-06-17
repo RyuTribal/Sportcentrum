@@ -19,6 +19,7 @@ passport.use(new GoogleStrategy({
 },
 // Return the user profile
 function(request, accessToken, refreshToken, profile, done) {
+  /*
     var con = mysql.createConnection({
       host: "localhost",
       user: "root",
@@ -30,6 +31,7 @@ function(request, accessToken, refreshToken, profile, done) {
 
     con.query(sql);
     con.end();
+  */
 
     return done(null, profile);
   }

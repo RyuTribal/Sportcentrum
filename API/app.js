@@ -42,7 +42,8 @@ app.get('/', (req, res) => {
 
 app.get("/failed", (req, res) => {res.send("Failed")})
 app.get("/success", isLoggedIn, (req, res) => {
-    res.send(`Welcome ${req.user.email}`)
+    res.redirect("http://localhost:3000/profile")
+    // res.send(`Welcome ${req.user.email}`)
 })
 
 // Scope

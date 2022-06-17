@@ -1,4 +1,5 @@
 import React from "react";
+import { login } from "../api_calls/user";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -127,6 +128,7 @@ export default function NavBar(props) {
               darkMode
               size="medium"
               color="inherit"
+              onClick={login}
             >
               Logga in
             </Button>
