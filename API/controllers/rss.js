@@ -1,7 +1,6 @@
 const Parser = require("rss-parser");
 const puppeteer = require("puppeteer");
 
-
 exports.Default = function (req, res) {
   res.send(req.body.username);
 };
@@ -13,8 +12,6 @@ exports.GetRss = function (req, res) {
 exports.Scrape = function (req, res) {
   scrape(res);
 };
-
-//
 
 
 
@@ -53,6 +50,8 @@ async function get(res) {
       feeding = false;
     } catch (err) {
       console.log("Can't Scrape : ", url, " Error number 2");
+      await page.close();
+      await browser.close();
     }
   }
   if (feeding) {
@@ -79,6 +78,8 @@ async function get(res) {
       console.log("Succsess");
     } catch (err) {
       console.log("Can't Scrape : ", url, " Error number 3", err);
+      await page.close();
+      await browser.close();
     }
   }
   
@@ -203,6 +204,7 @@ async function GetWebsitelink(res, lagar) {
       feeding = false;
     } catch (err) {
       console.log("Can't Scrape : ", elements, " Error number 2");
+      
     }
   }
   if (feeding) {
@@ -261,32 +263,6 @@ async function scrape(res) {
   );
   var lagar = []; //links for lagar
   let rss_links=[];
-
-  // let ligma = await page.evaluate(()=> {
-  //     find all tr elements
-  //         return [...document.querySelectorAll('li')]
-
-  //         check which one of them includes the word
-  //         .find(e=>e.className.includes('int-link tooltipstered'))
-
-  //         get the link inside
-  //         .querySelector('a')
-
-  //         do whatever you want to do with this
-  //         .href
-  //     })
-
-  // console.log(ligma);
-
-  // for (i = 1; i < 10; i++) {
-  //   var element = await page.waitForSelector(
-  //     "#section_Allsvenskan_2022 > ul > li:nth-child(" + i + ") > a"
-  //   );
-  //   var links = await page.evaluate((element) => element.href, element);
-  //   var text = await page.evaluate((element) => element.text, element);
-  //   lagar.push(links);
-  //   names.push(text);
-  // }
 
   try{
     lagar = await page.evaluate(() => {
