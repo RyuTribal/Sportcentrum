@@ -27,6 +27,11 @@ exports.links = async function(req, res){
     await links(res);
 };
 
+exports.test = async function(req, res){
+    await test(res);
+};
+
+
 async function Scraper(res, req){
     // Website to scrape (This is only page 1)
     const url = "https://www.aftonbladet.se/sportbladet/fotboll";
@@ -170,20 +175,26 @@ async function end(res, req) {
 }
 
 async function links(res, req) {
-    let urls = ["https://www.expressen.se/", "https://www.dn.se/", "https://www.gp.se/", "https://www.svt.se/", "https://www.aftonbladet.se/", "https://www.svd.se/", "https://www.sydsvenskan.se/"];
+    let urls = ["https://www.expressen.se/", "https://www.dn.se/", "https://www.gp.se/", "https://www.svt.se/", "https://www.aftonbladet.se/", "https://www.sydsvenskan.se/"];
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     let articles = [];
 
-    for (let i = 0; i < urls.length; i++) {
+    for (let i = 4; i < 5; i++) {
         await page.goto(urls[i].concat("sport"));
         let news = [];
 
         try {
             news = await page.evaluate(() => {
                 let link = [];
-                
-                let anchor = element.getElementsByTagName('a');
+                let main = document.getElementsByTagName('main');
+
+                for (var element of main) {
+                    let anchor = element.getElementsByTagName('a');
+                    for (var hrefLink of anchor) {
+                        link.push(hrefLink.href);
+                    }
+                }
                 
                 return link;
             });
@@ -192,13 +203,29 @@ async function links(res, req) {
             console.log("Not found", err);
         }
 
+        for (let j = 0; j < news.length; j++) {
+            if (!news[j].includes(urls[i])) {
+                news.splice(j, 1);
+                j--;
+            }
+        }
+
         console.log(news);
         articles.push(news);
     }
 
     await page.close();
     await browser.close();
-    console.log(articles);
+    console.log(articles[0].length);
     res.send(articles);
     return articles;
+}
+
+async function test(res, req) {
+    let text = [];
+    text = await links(res, req);
+
+    res.send(text);
+
+    return text;
 }
