@@ -27,10 +27,6 @@ exports.links = async function(req, res){
     await links(res);
 };
 
-exports.test = async function(req, res){
-    await test(res);
-};
-
 
 async function Scraper(res, req){
     // Website to scrape (This is only page 1)
@@ -180,7 +176,7 @@ async function links(res, req) {
     const page = await browser.newPage();
     let articles = [];
 
-    for (let i = 4; i < 5; i++) {
+    for (let i = 0; i < urls.length; i++) {
         await page.goto(urls[i].concat("sport"));
         let news = [];
 
@@ -219,13 +215,4 @@ async function links(res, req) {
     console.log(articles[0].length);
     res.send(articles);
     return articles;
-}
-
-async function test(res, req) {
-    let text = [];
-    text = await links(res, req);
-
-    res.send(text);
-
-    return text;
 }
