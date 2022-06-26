@@ -21,17 +21,23 @@
     "express-oauth2-jwt-bearer": "^1.1.0",
     "express-openid-connect": "^2.7.2",
     "http-proxy-middleware": "^2.0.4",
+    "hug": "^0.0.1",
     "mysql": "^2.18.1",
+    "node-fetch": "^2.6.7",
     "passport": "^0.5.2",
     "passport-google-oauth2": "^0.2.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0",
     "puppeteer": "^14.0.0",
     "rss-parser": "^3.12.0",
-    "save": "^2.5.0"
+    "save": "^2.5.0",
+    "spacy-nlp": "github:jeffreyflynt/spacy-nlp",
+    "spacy-nlp-node": "^1.2.3",
+    "waitress": "^0.1.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
+    "spacy": "^0.0.4",
     "webpack": "^5.70.0"
   }
 }
