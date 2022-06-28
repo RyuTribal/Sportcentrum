@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Typography, Box, Checkbox } from "@mui/material";
 import { CircleOutlined, Circle } from "@mui/icons-material";
 import theme from "../material-ui-themes/theme";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import { withRouter } from "next/router";
 
 class Splash extends Component {
@@ -35,7 +35,7 @@ class Splash extends Component {
     let sports_arr = [];
     Object.keys(this.state.sports).map((sport, i) => {
       if (this.state.sports[sport] === true || this.state.allPicked === true) {
-        sports_arr.push(sport);
+        sports_arr.push(sport.toLowerCase());
       }
     });
     localStorage.setItem("sports", JSON.stringify(sports_arr));

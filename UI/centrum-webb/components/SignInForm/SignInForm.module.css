@@ -10,23 +10,17 @@
   max-width: 510px;
   display: block;
   margin: 0 auto;
+  width:100%;
 }
 
-.formContainerCenter > *{
-    margin-bottom: 30px;
+.formContainerCenter > button{
+    margin-top: 20px;
 }
 
 .formContainerBorder {
   border-radius: 5px;
   padding: 30px;
   border: 1px solid #383838;
-}
-
-.uniError {
-  color: #f44336;
-  text-align: center;
-  transition: 0.4s;
-  padding-bottom: 20px;
 }
 
 .header {
@@ -54,4 +48,12 @@
 .forgotPassword {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.passCheck{
+  color: #f44336;
+}
+
+.passCorrect{
+  color: #709146;
 }

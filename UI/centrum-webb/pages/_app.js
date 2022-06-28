@@ -12,8 +12,8 @@ import BottomNavBar from "../components/BottomNavBar/BottomNavBar";
 import { Toolbar } from "@mui/material";
 import { wrapper, store } from "../redux/store";
 import { Provider } from "react-redux";
-import { Box } from "@mui/system";
-import styles from "../styles/general.css"
+import "../styles/general.css";
+
 
 // Client-side cache shared for the whole session
 // of the user in the browser.
@@ -24,6 +24,7 @@ function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const router = useRouter();
   const { pathname } = router;
+
   //Place paths where header should be invisible here
   const noNav = ["/splash"];
   return (
@@ -37,15 +38,15 @@ function MyApp(props) {
                 build upon. */}
 
         <CssBaseline />
-        {noNav.includes(pathname) ? null : <NavBar />}
-        {noNav.includes(pathname) ? null : <Toolbar />}
         <Provider store={store}>
-        <Box className="content_container">
+          {noNav.includes(pathname) ? null : <NavBar />}
+          {noNav.includes(pathname) ? null : <Toolbar />}
+
           <Component {...pageProps} />
-        </Box>
+
+          {noNav.includes(pathname) ? null : <Toolbar />}
+          {noNav.includes(pathname) ? null : <BottomNavBar />}
         </Provider>
-        {noNav.includes(pathname) ? null : <Toolbar />}
-        {noNav.includes(pathname) ? null : <BottomNavBar />}
       </ThemeProvider>
       <style jsx global>{`
         html {

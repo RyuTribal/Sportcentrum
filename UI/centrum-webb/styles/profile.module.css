@@ -1,0 +1,91 @@
+.banner{
+    width: 100%;
+    background-color: #c64d2c;
+    display:flex;
+    flex-direction: row;
+    min-height: 200px;
+    align-items: stretch;
+}
+
+.profileImgWrapper{
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileImgWrapper > * {
+    cursor: pointer;
+}
+
+.profileDetailsWrapper{
+    flex: 2;
+    color: #f6f2ef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profileDetailsWrapper > *{
+    cursor: pointer;
+}
+
+.tabPanel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tabPanel > *{
+    max-width: 500px;
+}
+
+.tagWrapper{
+    width: 100%;
+}
+
+.tagContainer{
+    max-height: 40%;
+    height: 40%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+
+.tagContainer > *{
+    margin: 5px;
+}
+
+.infoWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoBox{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px 0;
+    border: 1px;
+    border-color: borde;
+}
+
+.infoBox > *{
+    flex: 1;
+    width: 100%;
+}
+
+.cat{
+    font-weight: bold;
+    text-align: start;
+}
+
+.val{
+    text-align: center;
+}
+
+.arrowIcon{
+    display: flex;
+    justify-content: flex-end;
+}

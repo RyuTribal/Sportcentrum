@@ -1,19 +1,13 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
-require("../user/auth");
+const controller = require("../controllers/user");
 
-router.get("/login/federated/google", passport.authenticate("google"));
-router.get(
-  "/oauth2/redirect/google",
-  passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "http://localhost:3000/",
-  })
-);
-router.post("/logout", function (req, res, next) {
-  req.logout();
-  res.redirect("http://localhost:3000/");
-});
+router.post("/create_user", controller.createUser);
+router.post("/login", controller.Login);
+router.get("/check_login", controller.isLoggedIn);
+router.get("/logout", controller.Logout);
+router.get("/token/:token", controller.VerifyToken);
+router.post("/reset_password", controller.SendResetPassword);
+router.post("/reset_confirm", controller.Password_Confirm);
 
 module.exports = router;

@@ -8,3 +8,13 @@
 .input:valid:focus{
     background-color: transparent !important;
 }
+
+.error {
+  color: #f44336;
+  text-align: left;
+  transition: 0.4s;
+  padding-top: 10px;
+  height:43.5px;
+  padding-bottom: 10px;
+  font-size:15px;
+}

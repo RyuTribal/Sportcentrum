@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
-import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
+import { AppBar, Toolbar, Typography, InputBase, Avatar } from "@mui/material";
 import {
   CalendarMonthOutlined,
   GroupsOutlined,
@@ -12,7 +12,10 @@ import styles from "./NavBar.module.css";
 import { Box } from "@mui/system";
 import useWindowSize from "../../redundant_functions/WindowSize";
 import { NextLinkComposed } from "../Link/Link";
-import {store} from "../../redux/store";
+import { store } from "../../redux/store";
+import { getLoggedInUser } from "../../api_calls/user";
+import { userAdd } from "../../redux/actions/user";
+import {connect} from "react-redux";
 
 const SearchBar = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,7 +61,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function NavBar(props) {
   const size = useWindowSize();
-  console.log(store.getState());
+  useEffect(() => {
+    getLoggedInUser().then((res) => {
+      if (res.user) {
+        props.set_user(res.user);
+      }
+    });
+  });
   if (size.width > 851) {
     return (
       <AppBar position="fixed" sx={{ alignItems: "center" }}>
@@ -101,21 +110,36 @@ function NavBar(props) {
             <CustomButton buttontype="icon" size="large" color="inherit">
               <NotificationsOutlined fontSize="medium" />
             </CustomButton>
-            <CustomButton
-              sx={{ height: "40px" }}
-              darkmode
-              size="medium"
-              color="inherit"
-              component={NextLinkComposed}
-              to={{
-                pathname: "/signin",
-              }}
-            >
-              Logga in
-            </CustomButton>
-            {/*<Button buttontype="icon" size="large" color="inherit">
-              <Avatar />
-            </Button>*/}
+            {props.user ? (
+              <CustomButton
+                buttontype="icon"
+                component={NextLinkComposed}
+                to={{
+                  pathname: "/profile",
+                }}
+              >
+                <Avatar
+                  sx={{ bgcolor: "#c97d5c" }}
+                  alt={`${props.user.firstname} ${
+                    props.user.lastname
+                  }`}
+                  src="/broken-image.jpg"
+                />
+              </CustomButton>
+            ) : (
+              <CustomButton
+                sx={{ height: "40px" }}
+                darkmode
+                size="medium"
+                color="inherit"
+                component={NextLinkComposed}
+                to={{
+                  pathname: "/signin",
+                }}
+              >
+                Logga in
+              </CustomButton>
+            )}
           </Box>
         </Toolbar>
         {props.children}
@@ -148,4 +172,13 @@ function NavBar(props) {
   }
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+  return { user: state.userReducers.user };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    set_user: (user) => dispatch(userAdd(user)),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
