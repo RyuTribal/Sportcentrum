@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const rss = require('./routes/rss');
 const schedule = require('./routes/schedule');
+const scraper = require('./routes/scraper');
 const app = express(),
         bodyParser = require('body-parser'),
         port = 3080;
@@ -70,6 +71,7 @@ app.use(bodyParser.urlencoded());
 
 app.use('/api/rss', rss);
 app.use('/api/schedule', schedule);
+app.use('/api/scraper', scraper)
 
 app.listen(port, () =>{
     console.log(`Server listening on port::${port}`);
