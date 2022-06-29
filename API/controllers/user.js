@@ -8,7 +8,7 @@ const randtoken = require("rand-token").generator({
 });
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(
-  "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"
+  "insert_api_key"
 );
 
 const templates = {
