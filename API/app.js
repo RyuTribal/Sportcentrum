@@ -3,6 +3,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const rss = require('./routes/rss');
+const scraper = require('./routes/scraper');
 const schedule = require('./routes/schedule');
 const scraper = require('./routes/scraper');
 const app = express(),
@@ -70,6 +71,7 @@ app.use(bodyParser.urlencoded());
 
 
 app.use('/api/rss', rss);
+app.use('/api/scraper', scraper);
 app.use('/api/schedule', schedule);
 app.use('/api/scraper', scraper)
 
@@ -77,4 +79,4 @@ app.listen(port, () =>{
     console.log(`Server listening on port::${port}`);
 });
 
-//this code is halal certified
+// This code is halal certified
