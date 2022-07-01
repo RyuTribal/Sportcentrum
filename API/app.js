@@ -3,7 +3,6 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const rss = require('./routes/rss');
-const scraper = require('./routes/scraper');
 const schedule = require('./routes/schedule');
 const scraper = require('./routes/scraper');
 const app = express(),

@@ -1,5 +1,9 @@
 const puppeteer = require("puppeteer");
 const { spawn } = require("child_process");
+const { link } = require("fs");
+const { url } = require("inspector");
+const { timeStamp } = require("console");
+const { stringify } = require("querystring");
 // const spacy = require('sv_core_news_lg');
 // const spacy = require('spacy');
 
@@ -28,13 +32,33 @@ exports.links = async function(req, res){
 };
 
 
+
+
 async function Scraper(res, req){
     // Website to scrape (This is only page 1)
-    const url = "https://www.aftonbladet.se/sportbladet/fotboll";
+    const url = "https://www.aftonbladet.se/";
     // Use puppeteer to scrape the website
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     await page.goto(url);
+
+    let findnews = await page.evaluate(() => {
+        
+        let elements =  document.getElementsByTagName("a");
+        
+        
+        for(var l = 0; l < elements.length; l++){
+            if(elements[l].href.includes("sport")){
+                return elements[l].href;
+            }
+        }
+        
+    });
+
+    await page.goto(findnews);
+
+
+
     let news;
 
     try {
@@ -78,7 +102,7 @@ async function Scraper(res, req){
     news = news.slice(1);
     console.log(news);
     // res.send(news);
-    return news;
+    res.send(news);
 }
 
 // News = [link, image, plus, title, date, category, text]
@@ -142,77 +166,148 @@ async function newsScraper(res, req) {
     return articles;
 }
 
-async function py(res, req) {
-    let text = [];
-    text = await newsScraper(res, req);
+// async function py(res, req) {
+//     let text = [];
+//     text = await newsScraper(res, req);
 
-    for (let i = 0; i < text.length; i++) {
-        const python = spawn('python', ['H:/code/visual_studio_code/nlp/sp.py', text[i][5]]);
-        python.stdout.on('data', (data) => {
-            text[i][5] = data.toString();
-        });
+//     for (let i = 0; i < text.length; i++) {
+//         const python = spawn('python', ['H:/code/visual_studio_code/nlp/sp.py', text[i][5]]);
+//         python.stdout.on('data', (data) => {
+//             text[i][5] = data.toString();
+//         });
 
-        python.stderr.on('data', (data) => {
-            console.log('Failed');
-        });
+//         python.stderr.on('data', (data) => {
+//             console.log('Failed');
+//         });
 
-        python.on('close', (code) => {
-            console.log('Success' + text[i][5]);
-        });
-    }
-    return text;
-}
+//         python.on('close', (code) => {
+//             console.log('Success' + text[i][5]);
+//         });
+//     }
+//     return text;
+// }
 
-async function end(res, req) {
-    let all = [];
-    all = await py(res, req);
-    res.send(all);
-    return all;
-}
+// async function end(res, req) {
+//     let all = [];
+//     all = await py(res, req);
+//     res.send(all);
+//     return all;
+// }
 
 async function links(res, req) {
     let urls = ["https://www.expressen.se/", "https://www.dn.se/", "https://www.gp.se/", "https://www.svt.se/", "https://www.aftonbladet.se/", "https://www.sydsvenskan.se/"];
+    
+    let sport = "fotboll";
+
+    const start=  Date.now();
+
+    let links=[];
+
+
+
+    
+    
+    for (const url of urls){
+        links.push(getthelinks(url,sport));
+    }
+    
+    const link= await Promise.all(links);
+
+    const finish=  (Date.now() -start);
+
+    console.log(finish)
+
+
+
+    res.send(link)
+}
+
+async function getthelinks(urls,sport){
+    let sports="fotboll";
+    console.log(sports)
+    var findsport;
+
+    // this part finds the link for sport section
+
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
-    let articles = [];
 
-    for (let i = 0; i < urls.length; i++) {
-        await page.goto(urls[i].concat("sport"));
-        let news = [];
+    await page.goto(urls);
 
-        try {
-            news = await page.evaluate(() => {
-                let link = [];
-                let main = document.getElementsByTagName('main');
+    
 
-                for (var element of main) {
-                    let anchor = element.getElementsByTagName('a');
-                    for (var hrefLink of anchor) {
-                        link.push(hrefLink.href);
-                    }
-                }
-                
-                return link;
-            });
-
-        } catch(err){
-            console.log("Not found", err);
-        }
-
-        for (let j = 0; j < news.length; j++) {
-            if (!news[j].includes(urls[i])) {
-                news.splice(j, 1);
-                j--;
+    let findnews = await page.evaluate(() => {      
+        
+        
+        let elements =  document.getElementsByTagName("a");
+        
+        
+        for(var l = 0; l < elements.length; l++){
+            if(elements[l].href.includes("sport")){
+                return elements[l].href;
             }
         }
+        
+    });
 
-        console.log(news);
-        articles.push(news);
+    await page.goto(findnews);
+    
+    // find the given sport
+
+    try{
+        
+        findsport = await page.evaluate((sports) => {      
+            let elements =  document.getElementsByTagName("a");
+        
+        
+            for(var l = 0; l < elements.length; l++){
+                if(elements[l].href.includes(sports)){
+                    return elements[l].href;
+                }
+            }       
+        });
+        
+    } catch(err){
+        console.log("Sport wasn't found", findnews);
+        findsport=null;
+        return null;
+    }
+ 
+    
+
+    //await page.goto(findsport);
+    
+
+    // this part scraper every link 
+    let news = [];
+
+    try {
+    news = await page.evaluate(() => {
+        let link = [];
+        let main = document.getElementsByTagName("main");
+
+        for (var element of main) {
+        let anchor = element.getElementsByTagName("a");
+        for (var hrefLink of anchor) {
+            link.push(hrefLink.href);
+        }
+        }
+
+        return link;
+    });
+    } catch (err) {
+
+    console.log("Not found", err);
     }
 
+
+
+    console.log(news);
+    
     await page.close();
     await browser.close();
-    console.log(articles[0].length);
-    res.send(articles);
-    return articles;
+
+
+    return news;
+
 }
